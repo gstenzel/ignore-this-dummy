@@ -14,11 +14,11 @@ def test_string_inversion_2():
 
 
 def test_fibonacci_1():
-    assert magic.main.fibonacci(0) == 0
-    assert magic.main.fibonacci(1) == 1
+    assert magic.main.wierd_fun(0) == 0
+    assert magic.main.wierd_fun(1) == 1
 
 
 def test_fibonacci_2():
-    assert magic.main.fibonacci(2) == 1
-    assert magic.main.fibonacci(3) == 2
-    assert magic.main.fibonacci(4) == 3
+    assert magic.main.wierd_fun(2) == 1
+    assert magic.main.wierd_fun(3) == 2
+    assert magic.main.wierd_fun(4) == 3

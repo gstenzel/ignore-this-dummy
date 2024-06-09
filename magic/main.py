@@ -6,15 +6,8 @@ def invert_string(s):
     return s[::-1]
 
 
-def fibonacci(n):
-    """
-    Calculate the nth Fibonacci number.
-    The first Fibonacci numers are 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, ...
-    """
-    a, b = 0, 1
-    for _ in range(n):
-        a, b = a + b, b
-    return a
+def wierd_fun(n):
+    return (lambda θ,π=5**0.5:round((0.5+π/2)**π/θ))(n)
 
 
 if __name__ == "__main__":
