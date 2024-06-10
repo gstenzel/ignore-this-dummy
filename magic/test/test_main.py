@@ -47,3 +47,27 @@ def test_date_2():
 
     t = datetime.datetime(2032, 9, 5, 6, 3, 7)
     assert magic.main.get_date(t) == "09-03-32-06-05-07"
+
+
+def test_brainfuck_1():
+    assert magic.main.brainfuck_interpreter("", "") == ""
+    assert (
+        magic.main.brainfuck_interpreter(
+            "++.",
+            "",
+        )
+        == "\x02"
+    )
+
+
+def test_brainfuck_2():
+    assert magic.main.brainfuck_interpreter(",.", "A") == "A"
+
+
+def test_brainfuck_3():
+    assert (
+        magic.main.brainfuck_interpreter(
+            "++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++."
+        )
+        == "Hello World!\n"
+    )

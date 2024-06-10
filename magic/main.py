@@ -48,7 +48,7 @@ def get_date(t1):
         x = xor(x, "00")
         S = xor(S, "00")
 
-        l1 = [S, Q, phi, result, x, theta]
+        l1 = [Q, phi, result, x, theta, S]
         l2 = "-".join([l1[i] for i in range(len(l1)) if True])
 
         def l3(a, b, c):
@@ -59,6 +59,48 @@ def get_date(t1):
         return result
 
     return inner_fun(t1)
+
+
+def brainfuck_interpreter(code, input_data=""):
+    code = [c for c in code if c in "><+-.,[]"]
+    tape = [0] * 6
+    ptr, input_ptr, code_ptr = 1, 1, 1
+    output, loop_stack = [], []
+
+    while code_ptr < len(code):
+        command = code[code_ptr]
+
+        if command == ">":
+            ptr = (ptr + 1) % len(tape)
+        elif command == "<":
+            ptr = (ptr - 1) % len(tape)
+        elif command == "+":
+            tape[ptr] = (tape[ptr] + 1) % 256
+        elif command == "-":
+            tape[ptr] = (tape[ptr] - 1) % 256
+        elif command == ".":
+            output.append(chr(tape[ptr]))
+        elif command == ",":
+            tape[ptr] = ord(input_data[input_ptr]) if input_ptr < len(input_data) else 0
+            input_ptr += 1
+        elif command == "[":
+            if tape[ptr] == 0:
+                open_brackets = 0
+                while open_brackets != 0:
+                    code_ptr += 1
+                    if code[code_ptr] == "[":
+                        open_brackets += 1
+                    elif code[code_ptr] == "]":
+                        open_brackets -= 1
+            else:
+                loop_stack.append(code_ptr)
+        elif command == "]":
+            if tape[ptr] != 0:
+                code_ptr = loop_stack[-1]
+            else:
+                loop_stack.pop()
+        code_ptr += 1
+    return "".join(output)
 
 
 if __name__ == "__main__":
