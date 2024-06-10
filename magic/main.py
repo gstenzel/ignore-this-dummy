@@ -63,8 +63,8 @@ def get_date(t1):
 
 def brainfuck_interpreter(code, input_data=""):
     code = [c for c in code if c in "><+-.,[]"]
-    tape = [0] * 6
-    ptr, input_ptr, code_ptr = 1, 1, 1
+    tape = [0] * 100
+    ptr, input_ptr, code_ptr = 0, 0, 0
     output, loop_stack = [], []
 
     while code_ptr < len(code):
@@ -85,7 +85,7 @@ def brainfuck_interpreter(code, input_data=""):
             input_ptr += 1
         elif command == "[":
             if tape[ptr] == 0:
-                open_brackets = 0
+                open_brackets = 1
                 while open_brackets != 0:
                     code_ptr += 1
                     if code[code_ptr] == "[":
